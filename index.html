@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width'>
+
+        <style>
+            .drag{position:absolute; float:left; width:100px; height:100px; background:indigo; z-index:1}
+
+            #drop {
+                width: 200px;
+                height: 200px;
+                position: relative;
+                background: #eee;
+                border: 1px solid #999;
+                margin: 0 auto;
+            }
+
+            #drop div {
+                width: 100px;
+                height: 100px;
+                float: left;
+            }
+
+            #drop .a {
+                border-right: 1px solid #ccc;
+                width: 99px;
+            }
+
+
+            #drop .c {
+                border-right: 1px solid #ccc;
+                width: 99px;
+                height: 99px;
+                border-top: 1px solid #ccc;
+            }
+
+            #drop .d {
+                border-top: 1px solid #ccc;
+                height: 99px;
+            }
+        </style>
+
+        <title>jquery.overlaps.js | Determine if an element overlaps/collides another.</title>
+    </head>
+
+    <body>
+        <div class="drag"></div>
+
+        <div id="drop">
+            <div class="a"></div>
+            <div class="b"></div>
+            <div class="c"></div>
+            <div class="d"></div>
+        </div>
+
+        <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
+        <script src='jquery.drag.js'></script>
+        <script src='jquery.drop.js'></script>
+        <script>
+            $(function() {
+                $(".drag").drag();
+                $("#drop").find('div').each(function() {
+                    var elem = $(this);
+                    elem.drop(function() {
+                        $(".drag").animate({
+                            top: elem.offset().top,
+                            left: elem.offset().left
+                        });
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
